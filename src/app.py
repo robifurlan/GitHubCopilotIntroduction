@@ -80,6 +80,7 @@ activities = {
     }
 }
 
+__version__ = "0.1.1"
 
 @app.get("/")
 def root():
@@ -125,3 +126,8 @@ def unregister_from_activity(activity_name: str, email: str):
 
     activity["participants"].remove(email)
     return {"message": f"Unregistered {email} from {activity_name}"}
+
+@app.get("/version")
+def version():
+    """Return app version and basic metadata."""
+    return {"version": __version__, "activities_count": len(activities)}
